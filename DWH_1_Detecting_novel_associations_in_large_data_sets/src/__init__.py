@@ -1,0 +1,1 @@
+"""MIC demo package"""
