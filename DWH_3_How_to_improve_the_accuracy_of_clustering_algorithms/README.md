@@ -41,3 +41,5 @@ label_agg = res.labels_
 label_dpc = DPC(data, cluster_num)
 nmi = metrics.adjusted_mutual_info_score(true-label, label_dpc, average_method='max')
 ```
+
+add experiment details
