@@ -3,7 +3,7 @@ outputs/
 output
 .env
 env
-
+.zip
 __pycache__/
 *.pyc
 *.pyo
