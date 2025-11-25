@@ -1,0 +1,12 @@
+[
+  {"type":"title", "title":"Clustering by fast search and find of density peaks", "subtitle":"Reproduction of Rodriguez & Laio (Science, 2014) experiments"},
+  {"type":"bullet", "title":"Motivation & idea", "bullets":["Cluster centers have high local density","Centers are at relatively large distance from points with higher density","Decision graph (density vs delta) helps select centers"], "notes":"Algorithm identifies cluster centers via high density and large separation."},
+  {"type":"bullet", "title":"Algorithm (short)", "bullets":["Compute local density ρ_i (cut-off or kernel)","Compute δ_i = distance to nearest point with higher ρ","Plot decision graph (ρ vs δ) and select centers","Assign each point to same cluster as nearest higher-density neighbor"], "notes":"See pseudocode in README_experiment.md"},
+  {"type":"image", "title":"R15 - clusters", "image":"R15_clusters.png", "notes":"Left: cluster result, Right: decision graph slide follows"},
+  {"type":"image", "title":"R15 - decision graph", "image":"R15_decision.png", "notes":"Decision graph: centers marked with X"},
+  {"type":"image", "title":"Aggregation - clusters", "image":"Aggregation_clusters.png"},
+  {"type":"image", "title":"Aggregation - decision graph", "image":"Aggregation_decision.png"},
+  {"type":"bullet", "title":"Results summary", "bullets":["Datasets: R15, Aggregation, flame, T7.10k","Metrics: ARI, NMI (when true labels known)","Outliers are often isolated points with low ρ and high δ"], "notes":"See outputs/dpc_results.csv for numeric values"},
+  {"type":"bullet", "title":"Notes & limitations", "bullets":["Choice of cut-off radius (percentile) matters","Human selection of centers from decision graph in original paper","High-dimensional datasets require kernel density or PCA preprocessing"]},
+  {"type":"bullet", "title":"How to reproduce", "bullets":["Install requirements from requirements_experiment.txt","Run run_dpc_experiments.py to create plots and results","Run create_pptx.py to assemble slides automatically"]}
+]
