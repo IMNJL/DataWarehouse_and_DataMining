@@ -57,3 +57,40 @@ Notes and suggestions
   - Run `HIAC.py` here and capture the printed NMI and generated images (I will install dependencies into the chosen environment).
   - Add a small `run_hiac_demo.py` wrapper to make parameter sweeps and automated result saving easier.
   - Add a short script to compute and display NMI before and after HIAC for KMeans / Agglomerative as additional comparisons.
+
+Regenerated DPC experiment (2025-11-25)
+--------------------------------------
+
+I regenerated the DPC experiments for the example shape datasets and saved the outputs under `outputs/` in this folder. The generated files are:
+
+- `outputs/R15_clusters.png`
+- `outputs/R15_decision.png`
+- `outputs/Aggregation_clusters.png`
+- `outputs/Aggregation_decision.png`
+- `outputs/flame_clusters.png`
+- `outputs/flame_decision.png`
+- `outputs/T7.10k_clusters.png`
+- `outputs/T7.10k_decision.png`
+- `outputs/dpc_results.csv`
+
+Summary of numeric results (from `outputs/dpc_results.csv`):
+
+| dataset | k (used) | ARI | NMI | clusters image | decision image |
+|---|---:|---:|---:|---|---|
+| R15 | 15 | 0.98213 | 0.98644 | `outputs/R15_clusters.png` | `outputs/R15_decision.png` |
+| Aggregation | 7 | 0.73187 | 0.88072 | `outputs/Aggregation_clusters.png` | `outputs/Aggregation_decision.png` |
+| flame | 2 | 0.45341 | 0.49010 | `outputs/flame_clusters.png` | `outputs/flame_decision.png` |
+| T7.10k | 3 | (no labels) | (no labels) | `outputs/T7.10k_clusters.png` | `outputs/T7.10k_decision.png` |
+
+Notes:
+
+- The script automatically selected k from the true label count when labels are present. For T7.10k the dataset included no labels in the file used here, so k was set to 3 by default.
+- ARI and NMI are computed when ground-truth labels are present; they are empty where labels were not available.
+- The decision graphs (`*_decision.png`) show density (ρ) vs delta (δ) and mark the cluster centers selected by the automated gamma ranking.
+
+If you'd like, I can now:
+
+1. Build a PPTX that embeds these images and the short summary (I can generate `DPC_experiment_presentation.pptx` in this folder).  
+2. Re-run the experiments with alternative radius/percentile values or using kernel density estimation instead of the hard cut-off, and append results.
+
+Tell me which of the two you'd like next and I will proceed.

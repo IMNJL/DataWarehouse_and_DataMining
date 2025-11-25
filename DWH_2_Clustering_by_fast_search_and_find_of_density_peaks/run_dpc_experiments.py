@@ -8,10 +8,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import adjusted_rand_score, normalized_mutual_info_score
 
+# import the local DPC module (script is executed from this folder)
 from DPC import DPC
 
 ROOT = os.path.dirname(__file__)
-DATA_DIR = os.path.join(ROOT, 'data-sets', 'shapes')
+# datasets are stored in the repository's DWH_3 folder; prefer that if available
+possible_dwh3 = os.path.join(os.path.dirname(ROOT), 'DWH_3_How_to_improve_the_accuracy_of_clustering_algorithms', 'data-sets', 'shapes')
+if os.path.exists(possible_dwh3):
+    DATA_DIR = possible_dwh3
+else:
+    DATA_DIR = os.path.join(ROOT, 'data-sets', 'shapes')
+    # fallback: use local data-sets in DWH_2 if present
 OUT_DIR = os.path.join(ROOT, 'outputs')
 os.makedirs(OUT_DIR, exist_ok=True)
 
