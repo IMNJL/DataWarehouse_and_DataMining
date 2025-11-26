@@ -20,7 +20,7 @@ from sklearn.datasets import load_breast_cancer
 from sklearn import decomposition as dec
 from sklearn import cluster
 
-from DPC import DPC
+from DWH_2_Clustering_by_fast_search_and_find_of_density_peaks.DPC import DPC
 
 global num
 num = 1
