@@ -1,0 +1,298 @@
+% Auto-generated LaTeX file containing the provided Data Mining notes
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{longtable}
+\usepackage{enumitem}
+\geometry{margin=1in}
+\begin{document}
+
+\title{Data Warehouse and Data Mining --- Summary Notes}
+\author{}
+\date{}
+\maketitle
+
+\section*{Chapter 1: Introduction}
+
+\textbf{1. Define Data Mining. What are the key characteristics of the extracted patterns?}
+\begin{itemize}
+  \item \textbf{Data Mining} is the process of automatically discovering interesting, non-trivial, implicit, previously unknown, and potentially useful patterns or knowledge from large amounts of data.
+  \item \textbf{Key characteristics:} The extracted patterns should be:
+  \begin{itemize}
+    \item \textbf{Valid:} Hold true on new data.
+    \item \textbf{Novel:} Previously unknown.
+    \item \textbf{Useful:} Actionable and potentially profitable.
+    \item \textbf{Understandable:} Interpretable by humans.
+  \end{itemize}
+\end{itemize}
+
+\textbf{2. What is the KDD process? How does it differ from Data Mining?}
+\begin{itemize}
+  \item \textbf{KDD (Knowledge Discovery in Databases)} is the overall process of discovering useful knowledge from data. It is a multi-step, iterative process that includes data cleaning, integration, selection, transformation, mining, pattern evaluation, and knowledge presentation.
+  \item \textbf{Difference:} Data Mining is a single, core step within the KDD process, specifically focused on applying algorithms to extract patterns from data.
+\end{itemize}
+
+\textbf{3. List the 7 steps of the KDD process in the correct order.}
+\begin{enumerate}
+  \item Data Cleaning
+  \item Data Integration
+  \item Data Selection
+  \item Data Transformation
+  \item Data Mining
+  \item Pattern Evaluation
+  \item Knowledge Presentation
+\end{enumerate}
+
+\textbf{4. Define the following tasks:}
+\begin{itemize}
+  \item \textbf{Classification:} Predicts a categorical (discrete, unordered) class label for a given data instance.
+  \item \textbf{Regression:} Predicts a continuous-valued (ordered) output for a given data instance.
+  \item \textbf{Cluster Analysis:} Groups a set of data objects into clusters (groups) such that objects within a cluster are similar to each other and dissimilar to objects in other clusters. It is an unsupervised learning task.
+\end{itemize}
+
+\section*{Chapter 2: Data Types \& Statistics}
+
+\textbf{1. What is the difference between Interval and Ratio attributes? Give examples.}
+\begin{itemize}
+  \item \textbf{Interval:} Measurements where the difference between values is meaningful, but there is no true zero point. (e.g., Temperature in Celsius or Fahrenheit, Calendar years).
+  \item \textbf{Ratio:} Measurements where the difference is meaningful \emph{and} there is a true zero point, allowing for statements about ratios. (e.g., Height, Weight, Temperature in Kelvin, Annual income).
+\end{itemize}
+
+\textbf{2. What is the "Curse of Dimensionality"?}
+\par
+It refers to phenomena that arise when analyzing and organizing data in high-dimensional spaces (with many attributes) that do not occur in low-dimensional settings. As dimensions increase, data becomes increasingly sparse, making distance measures less meaningful and algorithms computationally expensive and less effective.
+
+\textbf{3. Outlier Detection with Boxplot: Write the formulas for the upper and lower boundaries using IQR.}
+\begin{itemize}
+  \item IQR = Q3 - Q1
+  \item \textbf{Lower Bound} = Q1 - 1.5 * IQR
+  \item \textbf{Upper Bound} = Q3 + 1.5 * IQR
+\end{itemize}
+Data points outside these boundaries are considered potential outliers.
+
+\textbf{4. Jaccard Coefficient: Write the formula. When is it used (Symmetric or Asymmetric binary)?}
+\begin{itemize}
+  \item \textbf{Formula:} $J = \dfrac{M_{11}}{M_{01} + M_{10} + M_{11}}$ \\
+    Where $M_{11}$ = number of attributes where both objects are 1, $M_{01}$ = number where the first is 0 and second is 1, $M_{10}$ = number where the first is 1 and second is 0.
+  \item \textbf{Use:} It is used for \textbf{Asymmetric binary} attributes, where the presence of an attribute (1) is more important than its absence (0). (e.g., disease diagnosis).
+\end{itemize}
+
+\textbf{5. Minkowski Distances: Write the formulas or definitions for:}
+\begin{itemize}
+  \item \textbf{Manhattan Distance (h=1):} $\text{distance} = \sum_{i=1}^{n} |x_i - y_i|$
+  \item \textbf{Euclidean Distance (h=2):} $\text{distance} = \sqrt{\sum_{i=1}^{n} (x_i - y_i)^2}$
+  \item \textbf{Supremum Distance (h=\text{\infty}):} $\text{distance} = \max_{i} |x_i - y_i|$ (The maximum of the differences along any single dimension).
+\end{itemize}
+
+\textbf{6. Cosine Similarity: Write the formula. What type of data is it mostly used for?}
+\begin{itemize}
+  \item \textbf{Formula:} $\text{cos}(x, y) = \dfrac{x \cdot y}{\|x\| \\ \|y\|} = \dfrac{\sum_{i=1}^{n} x_i y_i}{\sqrt{\sum_{i=1}^{n} x_i^2} \sqrt{\sum_{i=1}^{n} y_i^2}}$
+  \item \textbf{Use:} It is mostly used for \textbf{high-dimensional sparse data}, such as \textbf{text data} represented as word vectors.
+\end{itemize}
+
+\section*{Chapter 3: Data Preprocessing}
+
+\textbf{1. List the four major tasks of Data Preprocessing.}
+\begin{enumerate}
+  \item Data Cleaning
+  \item Data Integration
+  \item Data Transformation
+  \item Data Reduction
+\end{enumerate}
+
+\textbf{2. Min-Max Normalization: Write the formula to scale data to [new\_min, new\_max].}
+\par
+$v' = \dfrac{v - \min_A}{\max_A - \min_A} \times (\text{new\_max} - \text{new\_min}) + \text{new\_min}$
+
+\textbf{3. Z-score Normalization: Write the formula. When is it preferred over Min-Max?}
+\begin{itemize}
+  \item \textbf{Formula:} $v' = \dfrac{v - \mu_A}{\sigma_A}$ where $\mu_A$ is the mean and $\sigma_A$ is the standard deviation of attribute A.
+  \item \textbf{Preference:} It is preferred when the actual minimum and maximum values are unknown or when the data contains \textbf{outliers}, as it is less sensitive to them.
+\end{itemize}
+
+\textbf{4. Discretization: What is the main difference between Entropy-Based and ChiMerge methods?}
+\begin{itemize}
+  \item \textbf{Entropy-Based (Top-Down):} A supervised method that uses class information to decide split points, aiming to maximize the purity (minimize entropy) of the resulting intervals.
+  \item \textbf{ChiMerge (Bottom-Up):} A supervised method that starts with each distinct value in its own interval and then merges adjacent intervals based on a chi-square statistical test, stopping when no more similar intervals can be merged.
+\end{itemize}
+
+\section*{Chapter 4: Association Rule Mining}
+
+\textbf{1. Define Support and Confidence formulas.}
+For a rule $X \rightarrow Y$:
+\begin{itemize}
+  \item \textbf{Support:} $\text{supp}(X \rightarrow Y) = P(X \cap Y) = \dfrac{\text{count}(X \cap Y)}{N}$
+  \item \textbf{Confidence:} $\text{conf}(X \rightarrow Y) = P(Y|X) = \dfrac{\text{count}(X \cap Y)}{\text{count}(X)}$
+\end{itemize}
+
+\textbf{2. Explain the Apriori Principle (Anti-monotone property).}
+\par
+The Apriori Principle states that "All non-empty subsets of a frequent itemset must also be frequent." Conversely, if an itemset is infrequent, all its supersets will also be infrequent. This \textbf{anti-monotone} property (if a set fails a test, all its supersets will also fail it) is used to prune the search space efficiently.
+
+\textbf{3. Lift: Write the formula. What do values >1, <1, and =1 mean?}
+\begin{itemize}
+  \item \textbf{Formula:} $\text{Lift}(X \rightarrow Y) = \dfrac{\text{conf}(X \rightarrow Y)}{\text{supp}(Y)} = \dfrac{\text{supp}(X \cap Y)}{\text{supp}(X) \times \text{supp}(Y)}$
+  \item \textbf{Interpretation:}
+    \begin{itemize}
+      \item \textbf{Lift > 1:} X and Y are positively correlated. The rule is useful.
+      \item \textbf{Lift = 1:} X and Y are independent. The rule is not useful.
+      \item \textbf{Lift < 1:} X and Y are negatively correlated.
+    \end{itemize}
+\end{itemize}
+
+\textbf{4. What is the difference between Closed and Maximal Itemsets?}
+\begin{itemize}
+  \item \textbf{Closed Itemset:} An itemset X is closed if there exists no proper superset of X that has the same support count as X. It is a lossless representation.
+  \item \textbf{Maximal Itemset:} An itemset X is maximal if it is frequent, and no proper superset of X is frequent. It is a lossy representation but very compact.
+\end{itemize}
+
+\section*{Chapter 4 (Part 2): Data Warehouse}
+
+\textbf{1. Compare OLTP and OLAP. (Users, Function, Data type).}
+\begin{longtable}{p{1.6in} p{1.8in} p{1.8in}}
+\textbf{Feature} & \textbf{OLTP (Online Transaction Processing)} & \textbf{OLAP (Online Analytical Processing)} \\
+\hline
+Users & Clerks, IT professionals & Managers, executives, data analysts \\
+Function & Day-to-day operations and transactions & Long-term decision support, data analysis, complex queries \\
+Data Type & Current, detailed, relational data & Historical, summarized, consolidated, multidimensional data \\
+\end{longtable}
+
+\textbf{2. Star Schema vs. Snowflake Schema: Which one is normalized? Which one is faster for queries?}
+\begin{itemize}
+  \item \textbf{Normalized:} The \textbf{Snowflake Schema} is more normalized because its dimension tables are decomposed into multiple related tables.
+  \item \textbf{Faster for Queries:} The \textbf{Star Schema} is generally faster for queries because it has fewer joins due to denormalized dimensions.
+\end{itemize}
+
+\textbf{3. List basic OLAP operations (e.g., Slice, Dice...). Describe them briefly.}
+\begin{itemize}
+  \item \textbf{Slice:} Selecting data for a single, fixed value of one dimension (e.g., "Sales for the year \textbf{2023}").
+  \item \textbf{Dice:} Selecting a subcube by defining a range of values on multiple dimensions (e.g., "Sales for \textbf{Q1 and Q2} in \textbf{Europe and Asia}").
+  \item \textbf{Roll-up:} Summarizing data to a higher level of abstraction (e.g., from "city" level to "country" level).
+  \item \textbf{Drill-down:} The opposite of roll-up, showing more detailed data (e.g., from "country" level to "city" level).
+  \item \textbf{Pivot (Rotate):} Reorienting the cube to see it from a different perspective (e.g., swapping rows and columns).
+\end{itemize}
+
+\section*{Chapter 5: Classification}
+
+\textbf{1. Decision Trees: Compare the splitting criteria for ID3, C4.5, and CART.}
+\begin{itemize}
+  \item \textbf{ID3:} Uses \textbf{Information Gain}. Tends to favor attributes with many values.
+  \item \textbf{C4.5:} Uses \textbf{Gain Ratio}, which is a normalized version of Information Gain that corrects the bias towards multi-valued attributes.
+  \item \textbf{CART:} Uses \textbf{Gini Index} for classification. It measures the impurity of a node.
+\end{itemize}
+
+\textbf{2. What is the "Naive" assumption in Naive Bayes?}
+\par
+The "Naive" assumption is that the values of the attributes (features) are \textbf{conditionally independent} given the class label. This simplifies the computation of probabilities significantly.
+
+\textbf{3. Zero-Probability Problem: How do we fix it in Bayesian classification?}
+\par
+We fix it by using \textbf{Laplace Estimation} (or Laplace Smoothing), which adds a small constant (usually 1) to every count. This ensures that no conditional probability is ever zero.
+
+\textbf{4. Evaluation Metrics: Write the formulas for:}
+\begin{itemize}
+  \item \textbf{Precision:} $\text{Precision} = \dfrac{TP}{TP + FP}$
+  \item \textbf{Recall:} $\text{Recall} = \dfrac{TP}{TP + FN}$
+  \item \textbf{F-measure:} $F\text{-}measure = \dfrac{2 \times \text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}$
+\end{itemize}
+
+\textbf{5. Ensemble Methods: What is the main difference between Bagging and Boosting?}
+\begin{itemize}
+  \item \textbf{Bagging (Bootstrap Aggregating):} Builds multiple models in \textbf{parallel} from bootstrapped samples of the training data and combines them (e.g., by voting). It reduces variance. (e.g., Random Forest).
+  \item \textbf{Boosting:} Builds multiple models in \textbf{sequence}, where each new model tries to correct the errors of the previous ones. It gives more weight to misclassified instances. It reduces bias. (e.g., AdaBoost, XGBoost).
+\end{itemize}
+
+\section*{Chapter 6: Cluster Analysis}
+
+\textbf{1. K-Means vs. K-Medoids: How do they differ in choosing the cluster center? Which is more robust to outliers?}
+\begin{itemize}
+  \item \textbf{K-Means:} The cluster center is the \textbf{mean (centroid)} of all points in the cluster.
+  \item \textbf{K-Medoids:} The cluster center is the most centrally located \textbf{actual data point (medoid)} in the cluster.
+  \item \textbf{Robustness:} \textbf{K-Medoids (PAM)} is more robust to outliers and noise because using a medoid is less influenced by extreme values than using a mean.
+\end{itemize}
+
+\textbf{2. DBSCAN: What are the two main parameters? What shapes can it detect?}
+\begin{itemize}
+  \item \textbf{Parameters:} \texttt{eps} (epsilon) - the radius of the neighborhood, and \texttt{minPts} - the minimum number of points required to form a dense region.
+  \item \textbf{Shapes:} It can detect clusters of \textbf{arbitrary shapes}, unlike K-Means which typically finds spherical clusters.
+\end{itemize}
+
+\textbf{3. Silhouette Coefficient: What is the range of values? What does a value close to 1 mean?}
+\begin{itemize}
+  \item \textbf{Range:} -1 to 1.
+  \item \textbf{Value close to 1:} It means the object is well-matched to its own cluster and poorly-matched to neighboring clusters, indicating good clustering.
+\end{itemize}
+
+\section*{Chapter 7: Outlier Analysis}
+
+\textbf{1. List and define the three types of outliers.}
+\begin{itemize}
+  \item \textbf{Global Outliers (Point Anomalies):} A data point that significantly deviates from the entire dataset.
+  \item \textbf{Contextual (Conditional) Outliers:} A data point that is an outlier in a specific context (e.g., a temperature of 35$^\circ$C is normal in summer but an outlier in winter).
+  \item \textbf{Collective Outliers:} A collection of data points that, as a group, deviate significantly from the entire dataset, even if individual points are not outliers.
+\end{itemize}
+
+\textbf{2. Compare Distance-based vs. Density-based (LOF) approaches. Which one handles varying densities better?}
+\begin{itemize}
+  \item \textbf{Distance-based:} An object is an outlier if it is far from most of its neighbors. It uses a global threshold. (e.g., k-NN based methods).
+  \item \textbf{Density-based (LOF - Local Outlier Factor):} An object is an outlier if its local density is significantly lower than the density of its neighbors. It uses a local threshold.
+  \item \textbf{Handling Varying Densities:} \textbf{Density-based (LOF)} handles varying densities much better because it compares the local density of a point to the local densities of its neighbors, rather than using a single global distance measure.
+\end{itemize}
+
+\section*{Chapter 8: Regression Analysis}
+
+\textbf{1. Linear Regression: Write the Normal Equation formula (Matrix form) for estimating coefficients.}
+\par
+$\hat{w} = (X^T X)^{-1} X^T y$
+\par
+Where:
+\begin{itemize}
+  \item $\hat{w}$ is the vector of coefficients (including the intercept).
+  \item $X$ is the matrix of input features (with a column of 1s for the intercept).
+  \item $y$ is the vector of target values.
+\end{itemize}
+
+\textbf{2. Logistic Regression: What function is used to map output to [0,1]? What is it used for (prediction or classification)?}
+\begin{itemize}
+  \item \textbf{Function:} The \textbf{Sigmoid (or Logistic) Function}: $P(y=1|x) = \dfrac{1}{1 + e^{-(w^Tx + b)}}$
+  \item \textbf{Use:} It is used for \textbf{classification} (specifically, binary classification), not prediction of a continuous value.
+\end{itemize}
+
+\textbf{3. What does the $R^{2}$ coefficient measure?}
+\par
+The $R^{2}$ (R-squared) coefficient, or the \textbf{coefficient of determination}, measures the proportion of the variance in the dependent variable that is predictable from the independent variable(s). It indicates how well the regression model fits the data.
+
+\section*{Chapter 10: Advanced Techniques}
+
+\textbf{1. Match the architecture to the data type: CNN, RNN, Transformer $\rightarrow$ (Text, Images, Sequential Data).}
+\begin{itemize}
+  \item \textbf{CNN (Convolutional Neural Network):} \textbf{Images}
+  \item \textbf{RNN (Recurrent Neural Network):} \textbf{Sequential Data} (e.g., Time Series, Text)
+  \item \textbf{Transformer:} \textbf{Text} (and other sequential data, but revolutionized NLP)
+\end{itemize}
+
+\textbf{2. BERT vs. GPT: Which one is an Encoder (Understanding)? Which one is a Decoder (Generation)?}
+\begin{itemize}
+  \item \textbf{BERT (Bidirectional Encoder Representations from Transformers):} It is an \textbf{Encoder}. It is designed for deep \textbf{understanding} of language (e.g., question answering, sentiment analysis).
+  \item \textbf{GPT (Generative Pre-trained Transformer):} It is a \textbf{Decoder}. It is designed for \textbf{generating} text (e.g., writing essays, translation, conversation).
+\end{itemize}
+
+\section*{Chapter 11: Visualization}
+
+\textbf{1. High-Dimensional Data: Name two methods for visualizing multivariate data.}
+\begin{enumerate}
+  \item Parallel Coordinates
+  \item Scatter Plot Matrix (SPLOM)
+\end{enumerate}
+
+\textbf{2. Graph Visualization: What is the main disadvantage of Node-Link diagrams for dense graphs? What is the alternative?}
+\par
+\textbf{Main Disadvantage:} They can become a "hairball" or visually cluttered and unreadable in dense graphs. \\
+\textbf{Alternative:} Use matrix-based visualizations or aggregated/summarized views.
+
+\vfill
+\noindent{\small Generated from the provided notes.}
+
+\end{document}
